@@ -10,7 +10,7 @@ def isHangul(text):
     return hanCount > 0
 
 def check_latest_update():
-    url = 'http://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu4&page_num=20&category=&search_type=sub_memo&keyword='
+    url = 'http://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu4&page_num=20&category=&search_type=sub_memo&keyword=%C4%B7%C7%CE'
     html = requests.get(url).text
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -22,7 +22,7 @@ def check_latest_update():
         latest_update = current_day + " " + latest_update
 
     print("*** latest_update: " + latest_update + " ***");
-
+    
     return latest_update
 
 def check_crawling_target(a_tag, latest_update):
@@ -36,7 +36,7 @@ def check_crawling_target(a_tag, latest_update):
     print(temp_date)
 
     # latest_update < temp_date
-    if (1):
+    if (latest_update<temp_date):
 
         current_image = "http:" + a_tag.find("td", {"valign": "top"}).find("img")["src"]
         print(current_image)
@@ -81,7 +81,7 @@ if __name__ == '__main__':
     while(1):
         print("\n-체크-")
 
-        url = 'http://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu4&page_num=20&category=&search_type=sub_memo&keyword='
+        url = 'http://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu4&page_num=20&category=&search_type=sub_memo&keyword=%C4%B7%C7%CE'
         html = requests.get(url).text
         soup = BeautifulSoup(html, 'html.parser')
 
@@ -93,6 +93,5 @@ if __name__ == '__main__':
 
         latest_update = check_latest_update()
         time.sleep(300)
-        a=input()
 
 
